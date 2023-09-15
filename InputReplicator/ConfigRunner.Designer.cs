@@ -132,7 +132,7 @@
             this.btStart.Size = new System.Drawing.Size(38, 37);
             this.btStart.TabIndex = 16;
             this.btStart.UseVisualStyleBackColor = true;
-            this.btStart.Click += new System.EventHandler(this.btStart_Click);
+            this.btStart.Click += new System.EventHandler(this.btStart_ClickAsync);
             // 
             // button1
             // 

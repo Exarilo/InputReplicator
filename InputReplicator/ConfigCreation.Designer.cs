@@ -33,13 +33,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tbEvents = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.panelTopBar = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.btRecord = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tbConfigName = new System.Windows.Forms.TextBox();
+            this.panelTopBar = new System.Windows.Forms.Panel();
+            this.btSave = new System.Windows.Forms.Button();
             this.btClose = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -62,7 +61,7 @@
             // 
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.btRecord);
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.tbConfigName);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 25);
             this.panel2.Name = "panel2";
@@ -88,44 +87,6 @@
             this.tbEvents.Size = new System.Drawing.Size(158, 43);
             this.tbEvents.TabIndex = 0;
             // 
-            // textBox1
-            // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(208, 20);
-            this.textBox1.TabIndex = 15;
-            this.textBox1.Text = "Config1";
-            // 
-            // panelTopBar
-            // 
-            this.panelTopBar.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.panelTopBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelTopBar.Controls.Add(this.button2);
-            this.panelTopBar.Controls.Add(this.button1);
-            this.panelTopBar.Controls.Add(this.btClose);
-            this.panelTopBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTopBar.Location = new System.Drawing.Point(0, 0);
-            this.panelTopBar.Name = "panelTopBar";
-            this.panelTopBar.Size = new System.Drawing.Size(208, 25);
-            this.panelTopBar.TabIndex = 11;
-            this.panelTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
-            this.panelTopBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
-            this.panelTopBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label1.Location = new System.Drawing.Point(0, 88);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(208, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "00:00:00";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // btRecord
             // 
             this.btRecord.BackgroundImage = global::InputReplicator.Properties.Resources.record;
@@ -137,33 +98,46 @@
             this.btRecord.UseVisualStyleBackColor = true;
             this.btRecord.Click += new System.EventHandler(this.btRecord_Click);
             // 
-            // button2
+            // tbConfigName
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.button2.BackgroundImage = global::InputReplicator.Properties.Resources.save;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(24, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(24, 23);
-            this.button2.TabIndex = 14;
-            this.button2.UseVisualStyleBackColor = false;
+            this.tbConfigName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbConfigName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tbConfigName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbConfigName.Location = new System.Drawing.Point(0, 0);
+            this.tbConfigName.Name = "tbConfigName";
+            this.tbConfigName.Size = new System.Drawing.Size(208, 20);
+            this.tbConfigName.TabIndex = 15;
+            this.tbConfigName.Text = "Config1";
             // 
-            // button1
+            // panelTopBar
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.button1.BackgroundImage = global::InputReplicator.Properties.Resources.open;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 23);
-            this.button1.TabIndex = 13;
-            this.button1.UseVisualStyleBackColor = false;
+            this.panelTopBar.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.panelTopBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelTopBar.Controls.Add(this.btSave);
+            this.panelTopBar.Controls.Add(this.btClose);
+            this.panelTopBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTopBar.Location = new System.Drawing.Point(0, 0);
+            this.panelTopBar.Name = "panelTopBar";
+            this.panelTopBar.Size = new System.Drawing.Size(208, 25);
+            this.panelTopBar.TabIndex = 11;
+            this.panelTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
+            this.panelTopBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
+            this.panelTopBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
+            // 
+            // btSave
+            // 
+            this.btSave.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btSave.BackgroundImage = global::InputReplicator.Properties.Resources.save;
+            this.btSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btSave.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btSave.FlatAppearance.BorderSize = 0;
+            this.btSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btSave.Location = new System.Drawing.Point(0, 0);
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(24, 23);
+            this.btSave.TabIndex = 14;
+            this.btSave.UseVisualStyleBackColor = false;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // btClose
             // 
@@ -178,6 +152,17 @@
             this.btClose.Size = new System.Drawing.Size(20, 23);
             this.btClose.TabIndex = 12;
             this.btClose.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label1.Location = new System.Drawing.Point(0, 88);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(208, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "00:00:00";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // ConfigCreation
             // 
@@ -207,11 +192,10 @@
         private System.Windows.Forms.Panel panelTopBar;
         private System.Windows.Forms.Button btClose;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btRecord;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox tbConfigName;
+        private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.TextBox tbEvents;
     }
 }

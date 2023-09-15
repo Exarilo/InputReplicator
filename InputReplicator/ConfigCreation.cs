@@ -1,33 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace InputReplicator
 {
-    public enum MouseMessage
-    {
-        WH_MOUSE_LL = 14,
-        LeftButtonDown = 0x0201,
-        LeftButtonUp = 0x0202,
-        LeftDoubleClick = 0x0203,
-        RightButtonDown = 0x0204,
-        RightButtonUp = 0x0205,
-        RightDoubleClick = 0x0206,
-        MiddleButtonDown = 0x0207,
-        MiddleButtonUp = 0x0208,
-        MiddleDoubleClick = 0x0209,
-        MouseWheel = 0x020A,
-        XButtonDown = 0x020B,
-        XButtonUp = 0x020C,
-        MouseHWheel = 0x020E,
-    }
-
-
-
     public partial class ConfigCreation : Form
     {
         private ObservableInput inputs = new ObservableInput();
@@ -37,49 +14,35 @@ namespace InputReplicator
         private bool isTimerRunning = false;
         private Point lastPoint;
 
-        [DllImport("user32.dll")]
-        private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
-
-        [DllImport("user32.dll")]
-        private static extern bool UnhookWindowsHookEx(IntPtr hhk);
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
-
-        [DllImport("kernel32.dll")]
-        private static extern IntPtr GetModuleHandle(string lpModuleName);
-
-        private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
-
         private IntPtr hookId = IntPtr.Zero;
         public ConfigCreation()
         {
             InitializeComponent();
             hookId = SetHook();
             btClose.Click += (sender, args) => this.Close();
-            this.FormClosed+=(sender, args) => UnhookWindowsHookEx(hookId);
+            this.FormClosed+=(sender, args) => Win32.UnhookWindowsHookEx(hookId);
     
             tbEvents.ScrollBars = ScrollBars.Vertical;
             tbEvents.WordWrap = false;
 
         }
+
         private IntPtr SetHook()
         {
             using (Process curProcess = Process.GetCurrentProcess())
             using (ProcessModule curModule = curProcess.MainModule)
             {
-                return SetWindowsHookEx((int)MouseMessage.WH_MOUSE_LL, MouseHookProc, GetModuleHandle(curModule.ModuleName), 0);
+                return Win32.SetWindowsHookEx((int)MouseMessage.WH_MOUSE_LL, MouseHookProc, Win32.GetModuleHandle(curModule.ModuleName), 0);
             }
         }
         private IntPtr MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
-
             if (nCode >= 0 && Enum.IsDefined(typeof(MouseMessage), (int)wParam))
             {
                 Point clickPoint = Cursor.Position;
 
                 Point formPoint = this.PointToClient(clickPoint);
-                if (!this.ClientRectangle.Contains(formPoint)&&isTimerRunning)
+                if (!this.ClientRectangle.Contains(formPoint) && isTimerRunning)
                 {
                     tbEvents.AppendText($"{(MouseMessage)wParam} ({clickPoint.X},{clickPoint.Y})\r\n");
                     tbEvents.SelectionStart = tbEvents.Text.Length;
@@ -87,9 +50,8 @@ namespace InputReplicator
                     inputs.Add(new UserInput((MouseMessage)wParam, clickPoint));
                 }
             }
-            return CallNextHookEx(hookId, nCode, wParam, lParam);
+            return Win32.CallNextHookEx(hookId, nCode, wParam, lParam);
         }
-
 
         private void btRecord_Click(object sender, EventArgs e)
         {
@@ -144,6 +106,13 @@ namespace InputReplicator
             {
                 lastPoint = Point.Empty;
             }
+        }
+
+        private void btSave_Click(object sender, EventArgs e)
+        {
+            inputs.Save(tbConfigName.Text);
+            var a = 0;
+            //inputs.ForEach()
         }
     }
 }
