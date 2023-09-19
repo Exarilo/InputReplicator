@@ -20,8 +20,8 @@ namespace InputReplicator
         private void btEditConfig_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
-            ConfigCreation configCreation = new ConfigCreation();
-            configCreation.ShowDialog();
+            CreationConfig creationConfig = new CreationConfig();
+            creationConfig.ShowDialog();
             this.WindowState = FormWindowState.Normal;
 
         }
@@ -29,8 +29,8 @@ namespace InputReplicator
         private void btRunConfig_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
-            ConfigRunner configRunner = new ConfigRunner();
-            configRunner.ShowDialog();
+            Runner runner = new Runner();
+            runner.ShowDialog();
             this.WindowState = FormWindowState.Normal;
         }
     }
