@@ -31,6 +31,7 @@
             this.dagableBorder = new InputReplicator.DagableBorder();
             this.exaTimer = new InputReplicator.ExaTimer();
             this.panelCenter = new System.Windows.Forms.Panel();
+            this.btRefresh = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tbEvents = new System.Windows.Forms.TextBox();
             this.btRecord = new System.Windows.Forms.Button();
@@ -51,21 +52,33 @@
             // exaTimer
             // 
             this.exaTimer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.exaTimer.Location = new System.Drawing.Point(0, 90);
+            this.exaTimer.Location = new System.Drawing.Point(0, 131);
             this.exaTimer.Name = "exaTimer";
             this.exaTimer.Size = new System.Drawing.Size(210, 13);
             this.exaTimer.TabIndex = 1;
             // 
             // panelCenter
             // 
+            this.panelCenter.Controls.Add(this.btRefresh);
             this.panelCenter.Controls.Add(this.panel1);
             this.panelCenter.Controls.Add(this.btRecord);
             this.panelCenter.Controls.Add(this.tbConfigName);
             this.panelCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCenter.Location = new System.Drawing.Point(0, 25);
             this.panelCenter.Name = "panelCenter";
-            this.panelCenter.Size = new System.Drawing.Size(210, 65);
+            this.panelCenter.Size = new System.Drawing.Size(210, 106);
             this.panelCenter.TabIndex = 2;
+            // 
+            // btRefresh
+            // 
+            this.btRefresh.BackgroundImage = global::InputReplicator.Properties.Resources.refresh1;
+            this.btRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btRefresh.Location = new System.Drawing.Point(6, 65);
+            this.btRefresh.Name = "btRefresh";
+            this.btRefresh.Size = new System.Drawing.Size(38, 32);
+            this.btRefresh.TabIndex = 21;
+            this.btRefresh.UseVisualStyleBackColor = true;
+            this.btRefresh.Click += new System.EventHandler(this.btRefresh_Click);
             // 
             // panel1
             // 
@@ -73,7 +86,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(50, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(160, 45);
+            this.panel1.Size = new System.Drawing.Size(160, 86);
             this.panel1.TabIndex = 20;
             // 
             // tbEvents
@@ -83,7 +96,7 @@
             this.tbEvents.Location = new System.Drawing.Point(0, 0);
             this.tbEvents.Multiline = true;
             this.tbEvents.Name = "tbEvents";
-            this.tbEvents.Size = new System.Drawing.Size(160, 45);
+            this.tbEvents.Size = new System.Drawing.Size(160, 86);
             this.tbEvents.TabIndex = 18;
             // 
             // btRecord
@@ -126,7 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(210, 103);
+            this.ClientSize = new System.Drawing.Size(210, 144);
             this.Controls.Add(this.btSave);
             this.Controls.Add(this.panelCenter);
             this.Controls.Add(this.exaTimer);
@@ -154,5 +167,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox tbEvents;
         private System.Windows.Forms.Button btSave;
+        private System.Windows.Forms.Button btRefresh;
     }
 }

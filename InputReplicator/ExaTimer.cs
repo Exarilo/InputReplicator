@@ -29,6 +29,13 @@ namespace InputReplicator
             isTimerRunning = false;
         }
 
+        public void Reset()
+        {
+            seconds = 0;
+            label1.Text = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm\:ss");
+        }
+
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             seconds++;

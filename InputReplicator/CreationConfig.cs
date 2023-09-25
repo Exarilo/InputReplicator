@@ -9,6 +9,7 @@ namespace InputReplicator
     {
         private ObservableInput inputs = new ObservableInput();
         private IntPtr hookId = IntPtr.Zero;
+
         public CreationConfig()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace InputReplicator
                 return Win32.SetWindowsHookEx((int)MouseMessage.WH_MOUSE_LL, MouseHookProc, Win32.GetModuleHandle(curModule.ModuleName), 0);
             }
         }
+
         private IntPtr MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
             if (nCode >= 0 && Enum.IsDefined(typeof(MouseMessage), (int)wParam))
@@ -51,13 +53,24 @@ namespace InputReplicator
                 exaTimer.StopTimer();
             else
                 exaTimer.StartTimer();
-
         }
 
         private void btSave_Click(object sender, EventArgs e)
         {
+            if (inputs.GetAllConfigNames().Contains(tbConfigName.Text))
+            {
+                MessageBox.Show("This config name already exist");
+                return;
+            }
             inputs.Save(tbConfigName.Text);
-            var a = 0;
+        }
+
+        private void btRefresh_Click(object sender, EventArgs e)
+        {
+            tbEvents.Text = "";
+            inputs.Clear();
+            exaTimer.StopTimer();
+            exaTimer.Reset();
         }
     }
 }

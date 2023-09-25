@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dagableBorder1 = new InputReplicator.DagableBorder();
-            this.exaTimer = new InputReplicator.ExaTimer();
+            this.button1 = new System.Windows.Forms.Button();
+            this.cbConfigs = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.gbRunningMode = new System.Windows.Forms.GroupBox();
@@ -40,49 +40,55 @@
             this.cbInfiniteMode = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btStart = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.exaTimer = new InputReplicator.ExaTimer();
+            this.dagableBorder1 = new InputReplicator.DagableBorder();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.gbRunningMode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
-            // dagableBorder1
+            // button1
             // 
-            this.dagableBorder1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dagableBorder1.Location = new System.Drawing.Point(0, 0);
-            this.dagableBorder1.Name = "dagableBorder1";
-            this.dagableBorder1.Size = new System.Drawing.Size(251, 25);
-            this.dagableBorder1.TabIndex = 0;
+            this.button1.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.button1.BackgroundImage = global::InputReplicator.Properties.Resources.open;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(2, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(24, 23);
+            this.button1.TabIndex = 14;
+            this.button1.UseVisualStyleBackColor = false;
             // 
-            // exaTimer
+            // cbConfigs
             // 
-            this.exaTimer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.exaTimer.Location = new System.Drawing.Point(0, 174);
-            this.exaTimer.Name = "exaTimer";
-            this.exaTimer.Size = new System.Drawing.Size(251, 13);
-            this.exaTimer.TabIndex = 1;
+            this.cbConfigs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbConfigs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.cbConfigs.FormattingEnabled = true;
+            this.cbConfigs.Location = new System.Drawing.Point(0, 25);
+            this.cbConfigs.Name = "cbConfigs";
+            this.cbConfigs.Size = new System.Drawing.Size(251, 21);
+            this.cbConfigs.TabIndex = 15;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.btStart);
-            this.panel2.Controls.Add(this.textBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 25);
+            this.panel2.Location = new System.Drawing.Point(0, 46);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(251, 149);
-            this.panel2.TabIndex = 13;
+            this.panel2.Size = new System.Drawing.Size(251, 128);
+            this.panel2.TabIndex = 16;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.gbRunningMode);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(52, 20);
+            this.panel3.Location = new System.Drawing.Point(52, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(199, 129);
+            this.panel3.Size = new System.Drawing.Size(199, 128);
             this.panel3.TabIndex = 17;
             // 
             // gbRunningMode
@@ -166,7 +172,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 108);
+            this.label2.Location = new System.Drawing.Point(14, 107);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 0;
@@ -176,43 +182,37 @@
             // 
             this.btStart.BackgroundImage = global::InputReplicator.Properties.Resources.play;
             this.btStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btStart.Location = new System.Drawing.Point(6, 23);
+            this.btStart.Location = new System.Drawing.Point(8, 11);
             this.btStart.Name = "btStart";
             this.btStart.Size = new System.Drawing.Size(38, 37);
             this.btStart.TabIndex = 16;
             this.btStart.UseVisualStyleBackColor = true;
+            this.btStart.Click += new System.EventHandler(this.btStart_ClickAsync);
             // 
-            // textBox1
+            // exaTimer
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(251, 20);
-            this.textBox1.TabIndex = 15;
-            this.textBox1.Text = "Config1";
+            this.exaTimer.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.exaTimer.Location = new System.Drawing.Point(0, 174);
+            this.exaTimer.Name = "exaTimer";
+            this.exaTimer.Size = new System.Drawing.Size(251, 13);
+            this.exaTimer.TabIndex = 1;
             // 
-            // button1
+            // dagableBorder1
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.button1.BackgroundImage = global::InputReplicator.Properties.Resources.open;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(2, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 23);
-            this.button1.TabIndex = 14;
-            this.button1.UseVisualStyleBackColor = false;
+            this.dagableBorder1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dagableBorder1.Location = new System.Drawing.Point(0, 0);
+            this.dagableBorder1.Name = "dagableBorder1";
+            this.dagableBorder1.Size = new System.Drawing.Size(251, 25);
+            this.dagableBorder1.TabIndex = 0;
             // 
             // Runner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(251, 187);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.cbConfigs);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.exaTimer);
             this.Controls.Add(this.dagableBorder1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -221,7 +221,6 @@
             this.Text = "Runner";
             this.TopMost = true;
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.gbRunningMode.ResumeLayout(false);
@@ -235,6 +234,8 @@
 
         private DagableBorder dagableBorder1;
         private ExaTimer exaTimer;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cbConfigs;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.GroupBox gbRunningMode;
@@ -245,7 +246,5 @@
         private System.Windows.Forms.CheckBox cbInfiniteMode;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btStart;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.Xml.Linq;
 using System.IO;
+using System.Linq;
 
 namespace InputReplicator
 {
@@ -38,6 +39,8 @@ namespace InputReplicator
     }
     public class ObservableInput : List<UserInput>
     {
+        private readonly string filePath = Path.Combine(Environment.CurrentDirectory, "configs.xml");
+  
         private DateTime lastAdditionTime;
 
         public new void Add(UserInput item)
@@ -46,37 +49,75 @@ namespace InputReplicator
             lastAdditionTime = DateTime.Now;
             base.Add(item);
         }
-        public void Load(string confName)
+        public Dictionary<string, List<UserInput>> Load()
         {
-            string filePath = Path.Combine(Environment.CurrentDirectory, confName + ".xml");
+            Dictionary<string, List<UserInput>> inputsForConfigs = new Dictionary<string, List<UserInput>>();
+
             if (File.Exists(filePath))
             {
                 XDocument document = XDocument.Load(filePath);
 
-                foreach (var eventElement in document.Descendants("event"))
+                foreach (var configElement in document.Descendants("config"))
                 {
-                    int code = Convert.ToInt32(eventElement.Attribute("code").Value.Substring(2), 16);
-                    string name = eventElement.Attribute("name").Value;
-                    int positionX = int.Parse(eventElement.Attribute("positionX").Value);
-                    int positionY = int.Parse(eventElement.Attribute("positionY").Value);
-                    int msDelay = int.Parse(eventElement.Attribute("msdelay").Value);
+                    string configName = configElement.Attribute("name")?.Value;
+                    if (!string.IsNullOrEmpty(configName))
+                    {
+                        List<UserInput> inputsForConfig = new List<UserInput>();
 
-                    UserInput userInput = new UserInput((MouseMessage)code, new Point(positionX, positionY),msDelay);
-                    base.Add(userInput);
+                        foreach (var eventElement in configElement.Descendants("event"))
+                        {
+                            int code = Convert.ToInt32(eventElement.Attribute("code").Value.Substring(2), 16);
+                            string name = eventElement.Attribute("name").Value;
+                            int positionX = int.Parse(eventElement.Attribute("positionX").Value);
+                            int positionY = int.Parse(eventElement.Attribute("positionY").Value);
+                            int msDelay = int.Parse(eventElement.Attribute("msdelay").Value);
+
+                            UserInput userInput = new UserInput((MouseMessage)code, new Point(positionX, positionY), msDelay);
+                            inputsForConfig.Add(userInput);
+                        }
+
+                        inputsForConfigs[configName] = inputsForConfig;
+                    }
                 }
             }
+
+            return inputsForConfigs;
         }
+
+        public List<string> GetAllConfigNames()
+        {
+            if (File.Exists(filePath))
+            {
+                XDocument document = XDocument.Load(filePath);
+
+                return document.Descendants("config")
+                    .Select(configElement => configElement.Attribute("name")?.Value)
+                    .Where(configName => !string.IsNullOrEmpty(configName))
+                    .ToList();
+            }
+
+            return new List<string>();
+        }
+
         public void Save(string confName)
         {
-            var xmlConf = this.ToXml(confName);
-            XDocument document = new XDocument(xmlConf);
-            string filePath = Path.Combine(Environment.CurrentDirectory, confName + ".xml");
+            XDocument document;
+
+            if (File.Exists(filePath))
+                document = XDocument.Load(filePath);
+            else
+                document = new XDocument(new XDeclaration("1.0", "utf-8", null), new XElement("configs"));
+
+            XElement rootElement = document.Root; 
+
+            XElement newConfig = ToXml(confName);
+            rootElement.Add(newConfig);
 
             document.Save(filePath);
         }
+
         private XElement ToXml(string confName)
         {
-            XElement rootElement = new XElement("configs");
             XElement configElement = new XElement("config", new XAttribute("name", confName));
             XElement eventsElement = new XElement("events");
 
@@ -91,8 +132,7 @@ namespace InputReplicator
                 eventsElement.Add(eventElement);
             }
             configElement.Add(eventsElement);
-            rootElement.Add(configElement);
-            return rootElement;
+            return configElement;
         }
     }
 }

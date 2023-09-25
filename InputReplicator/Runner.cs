@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace InputReplicator
 {
@@ -18,12 +20,15 @@ namespace InputReplicator
         private const uint MOUSEEVENTF_HWHEEL = 0x01000;
 
         private ObservableInput inputs = new ObservableInput();
+        private Dictionary<string, List<UserInput>> allConfigs;
 
         public Runner()
         {
             InitializeComponent();
-
-            inputs.Load("config01");
+            allConfigs = inputs.Load();
+            allConfigs?.ToList()?.ForEach(x => cbConfigs.Items.Add(x.Key));
+            if(cbConfigs.Items.Count>0)
+                cbConfigs.SelectedIndex = 0;
             DateTime initialTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 15, 0);
             dtpRunningModeTime.Value = initialTime;
 
@@ -56,7 +61,14 @@ namespace InputReplicator
         }
         private async Task ProcessInputAsync()
         {
-            foreach (UserInput userInput in inputs)
+            var selectedConfig= allConfigs.Where(x => x.Key.ToString() == cbConfigs.SelectedItem.ToString());
+            if (!selectedConfig.Any())
+            {
+                MessageBox.Show("could not found the selected config");
+                return;
+            }
+         
+            foreach (UserInput userInput in selectedConfig.First().Value)
             {
                 await Task.Delay(userInput.msDelay);
                 Win32.SetCursorPos(userInput.positionInScreen.X, userInput.positionInScreen.Y);
